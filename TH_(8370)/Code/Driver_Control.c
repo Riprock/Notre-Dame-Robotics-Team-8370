@@ -81,13 +81,13 @@ task usercontrol()
 
 
 		int LSy = vexRT[Ch3]; // Between -127 and 127 before divided
-		int LSx = vexRT[Ch2]; // ^
+		int RSy = vexRT[Ch2]; // ^
 
 		/*
 		* DRIVE
 		*/
 		motor[leftDrive] = LSy; // Left Motor
-		motor[rightDrive] = LSx; // Right Motor
+		motor[rightDrive] = RSy; // Right Motor
 
 		/*
 		* Shoot
@@ -97,19 +97,7 @@ task usercontrol()
 			motor(rightShoot) = 127;
 			motor(leftShoot) = -127;
 		}
-				/*
-		* lift
-		*/
-		while (vexRT[Btn8U] == 1)
-		{
-			motor(rightLift) = 63;
-			motor(leftLift) = 63;
-		}
-		while (vexRT[Btn8D] == 1)
-		{
-			motor(rightLift) = -63;
-			motor(leftLift) = -63;
-		}
+
 		/*
 		* Belt
 		*/
@@ -133,6 +121,6 @@ task usercontrol()
 			motor(ramp) = -127;
 		}
 
-UserControlCodePlaceholderForTesting();
+		UserControlCodePlaceholderForTesting();
 		}
 }
