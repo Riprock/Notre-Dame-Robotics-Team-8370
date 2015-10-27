@@ -18,7 +18,7 @@ task main() {
 		int LSy = vexRT[Ch3]; // Between -127 and 127
 		int LSx = vexRT[Ch4]; // ^
 		int RSy = vexRT[Ch2]; // ^
-		int RF = vexRT[Btn6U]; // Either 0 or 1
+		int RB = vexRT[Btn6D]; // Either 0 or 1
 
 		// Move at half speed
 		motor[FrontLeft] = (LSy + LSx) / 2;
@@ -26,13 +26,12 @@ task main() {
 		motor[FrontRight] = (LSy - LSx) / 2;
 		motor[BackRight] = (LSy - LSx) / 2;
 
-		if (RF == 1) {
+		if (RB == 1) {
 			// Right Trigger : Spin shooter full speed (with belt control).
-			int AbRSY = abs(RSy); // Absolute value of Right Stick y.
-			motor[mechFrontLeft] = AbRSY;
-			motor[mechBackLeft] = AbRSY;
-			motor[mechFrontRight] = AbRSY;
-			motor[mechBackRight] = AbRSY;
+			motor[mechFrontLeft] = 127;
+			motor[mechBackLeft] = 127;
+			motor[mechFrontRight] = 127;
+			motor[mechBackRight] = 127;
 		} else {
 			motor[mechFrontLeft] = 0;
 			motor[mechBackLeft] = 0;
