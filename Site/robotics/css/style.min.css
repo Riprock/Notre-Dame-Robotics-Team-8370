@@ -276,7 +276,7 @@ img::-moz-selection {
     background: 0 0;
 }
 video#bgvid { 
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     min-width: 100%;
@@ -290,3 +290,11 @@ video#bgvid {
     background-size: cover; 
 }
 
+@media screen and (max-device-width: 800px) {
+    html {
+         background: url(polina.jpg) #000 no-repeat center center fixed;
+    }
+    #bgvid {
+        display: none;
+    }
+}
