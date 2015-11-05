@@ -286,13 +286,12 @@ video#bgvid {
     z-index: -100;
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    background: url(polina.jpg) no-repeat;
+    background: url(http://ndrobotics.club/images/placeholder.jpg) no-repeat;
     background-size: cover; 
 }
-
 @media screen and (max-device-width: 800px) {
     html {
-         background: url(polina.jpg) #000 no-repeat center center fixed;
+         background: url(http://ndrobotics.club/images/placeholder.jpg) #000 no-repeat center center fixed;
     }
     #bgvid {
         display: none;
