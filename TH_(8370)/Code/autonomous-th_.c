@@ -25,75 +25,7 @@ task auto()
 			motor[rightMotor]  = 63;
 		}
 		
-		
-		
-		if(SensorValue(lineTracker) > threshold)
-		{
-			
-			motor[leftMotor] = 0;
-			motor[rightMotor] = 63;
-		}
-		wait(5)
-		{
-			motor[leftMotor]  = 63;
-			motor[rightMotor]  = 0;
-		}
-		
-		
-		
-		if(SensorValue(lineTracker) > threshold)
-		{
-			
-			motor[leftMotor] = 63;
-			motor[rightMotor] = 63;
-		}
-		wait(5)
-		{
-			motor[leftMotor]  = 63;
-			motor[rightMotor]  = 0;
-		}
-		
-		
-		
-		if(SensorValue(lineTracker) > threshold)
-		{
-			
-			motor[leftMotor] = 0;
-			motor[rightMotor] = 63;
-		}
-		wait(5)
-		{
-			motor[leftMotor]  = 63;
-			motor[rightMotor]  = 63;
-		}
-		
-		
-		
-		if(SensorValue(lineTracker) > threshold)
-		{
-			
-			motor[leftMotor] = 63;
-			motor[rightMotor] = 0;
-		}
-		wait(5)
-		{
-			motor[leftMotor]  = 63;
-			motor[rightMotor]  = 63;
-		}
-		
-		
-		
-		if(SensorValue(lineTracker) > threshold)
-		{
-			
-			motor[leftMotor] = 63;
-			motor[rightMotor] = 63;
-		}
-		wait(5)
-		{
-			motor[leftMotor]  = 0;
-			motor[rightMotor]  = 63;
-		}
+
 		else
 		{
 			wait(999999999999999999)
@@ -102,14 +34,8 @@ task auto()
 }
 
 end
-
-
-
 	
 task drive()	
-{
-	
-	
-	
+{	
 	
 }
