@@ -30,9 +30,9 @@
 
 void pre_auton()
 {
-  // Set bStopTasksBetweenModes to false if you want to keep user created tasks running between
-  // Autonomous and Tele-Op modes. You will need to manage all user created tasks if set to false.
-  bStopTasksBetweenModes = true;
+	// Set bStopTasksBetweenModes to false if you want to keep user created tasks running between
+	// Autonomous and Tele-Op modes. You will need to manage all user created tasks if set to false.
+	bStopTasksBetweenModes = true;
 
 	// All activities that occur before the competition starts
 	// Example: clearing encoders, setting servo positions, ...
@@ -57,10 +57,10 @@ task autonomous()
 	{
 		motor[rightDrive] = 63;
 		motor[leftDrive] = 63;
-	} else if (time1[T1] < 1000) {
+		} else if (time1[T1] < 1000) {
 		motor[rightDrive] = 63;
 		motor[leftDrive] = -63;
-	} else {
+		} else {
 		motor[rightDrive] = 0;
 		motor[leftDrive] = 0;
 
@@ -87,11 +87,14 @@ task usercontrol()
 {
 	// User control code here, inside the loop
 
+
 	while (true)
 	{
-	  // This is the main execution loop for the user control program. Each time through the loop
-	  // your program should update motor + servo values based on feedback from the joysticks.
-
+		// This is the main execution loop for the user control program. Each time through the loop
+		// your program should update motor + servo values based on feedback from the joysticks.
+		if (vexRT[Btn8R] == 1) {
+			startTask(autonomous);
+		}
 
 		int LSy = vexRT[Ch3]; // Between -127 and 127 before divided
 		int RSy = vexRT[Ch2]; // ^
@@ -146,5 +149,5 @@ task usercontrol()
 		}
 
 		UserControlCodePlaceholderForTesting();
-		}
+	}
 }
