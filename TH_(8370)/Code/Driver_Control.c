@@ -71,6 +71,7 @@ task autonomous()
 		motor[leftShootA] = 127;
 		motor[belt] = 127;
 	}
+	AutonomousCodePlaceholderForTesting();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
