@@ -49,29 +49,28 @@ void pre_auton()
 
 task autonomous()
 {
-	wait1Msec(2000);
-
 	clearTimer(T1);
-
-	if (time1[T1] < 500)
+	while(time1[T1] < 1000)
 	{
 		motor[rightDrive] = 63;
 		motor[leftDrive] = 63;
-		} else if (time1[T1] < 1000) {
+	}
+	while(time1[T1] < 5000)
+	{
 		motor[rightDrive] = 63;
 		motor[leftDrive] = -63;
-		} else {
+	}
+	while(time1[T1] < 10000)
+	{	
 		motor[rightDrive] = 0;
 		motor[leftDrive] = 0;
-
+	
 		motor[rightShootA] = -127;
 		motor[rightShootB] = -127;
 		motor[leftShootA] = 127;
 		motor[leftShootA] = 127;
 		motor[belt] = 127;
 	}
-
-	AutonomousCodePlaceholderForTesting();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
