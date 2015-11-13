@@ -39,7 +39,7 @@ task main() {
 			motor[mechBackRight] = 0;
 		}
 
-		// Left Stick controls ball belt.
+		// Right Stick controls ball belt.
 		motor[Belt] = RSy;
 	}
 }

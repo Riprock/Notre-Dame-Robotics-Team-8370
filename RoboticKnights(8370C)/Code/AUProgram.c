@@ -44,7 +44,7 @@ void rightHalf(float time_sec) {
 	wait(time_sec);
 }
 
-// Diagonal movement for quick maneuvering
+// Sideways movement
 void crabL(float time_sec) {
 	motor[BackLeft] = 63;
 	motor[BackRight] = -63;
