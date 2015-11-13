@@ -11,82 +11,91 @@
 
 // All movement functions half-speed
 void forwardHalf(float time_sec) {
-		motor[BackLeft] = 63;
-		motor[BackRight] = 63;
-		motor[FrontLeft] = 63;
-		motor[FrontRight] = 63;
+	motor[BackLeft] = 63;
+	motor[BackRight] = 63;
+	motor[FrontLeft] = 63;
+	motor[FrontRight] = 63;
 
-		wait(time_sec);
-	}
+	wait(time_sec);
+}
 void backHalf(float time_sec) {
-		motor[BackLeft] = -63;
-		motor[BackRight] = -63;
-		motor[FrontLeft] = -63;
-		motor[FrontRight] = -63;
+	motor[BackLeft] = -63;
+	motor[BackRight] = -63;
+	motor[FrontLeft] = -63;
+	motor[FrontRight] = -63;
 
-		wait(time_sec);
-	}
+	wait(time_sec);
+}
 
 void leftHalf(float time_sec) {
-		motor[BackLeft] = -63;
-		motor[BackRight] = 63;
-		motor[FrontLeft] = -63;
-		motor[FrontRight] = 63;
+	motor[BackLeft] = -63;
+	motor[BackRight] = 63;
+	motor[FrontLeft] = -63;
+	motor[FrontRight] = 63;
 
-		wait(time_sec);
-	}
+	wait(time_sec);
+}
 void rightHalf(float time_sec) {
-		motor[BackLeft] = 63;
-		motor[BackRight] = -63;
-		motor[FrontLeft] = 63;
-		motor[FrontRight] = -63;
+	motor[BackLeft] = 63;
+	motor[BackRight] = -63;
+	motor[FrontLeft] = 63;
+	motor[FrontRight] = -63;
 
-		wait(time_sec);
-	}
+	wait(time_sec);
+}
 
-	// Diagonal movement for quick maneuvering
-	void crabL(float time_sec) {
-		motor[BackLeft] = 63;
-		motor[BackRight] = -63;
-		motor[FrontLeft] = -63;
-		motor[FrontRight] = 63;
+// Diagonal movement for quick maneuvering
+void crabL(float time_sec) {
+	motor[BackLeft] = 63;
+	motor[BackRight] = -63;
+	motor[FrontLeft] = -63;
+	motor[FrontRight] = 63;
 
-		wait(time_sec);
-	}
-	void crabR(float time_sec) {
-		motor[BackLeft] = -63;
-		motor[BackRight] = 63;
-		motor[FrontLeft] = 63;
-		motor[FrontRight] = -63;
+	wait(time_sec);
+}
+void crabR(float time_sec) {
+	motor[BackLeft] = -63;
+	motor[BackRight] = 63;
+	motor[FrontLeft] = 63;
+	motor[FrontRight] = -63;
 
-		wait(time_sec);
-	}
-	void spinUp() {
-		motor[mechFrontLeft] = 127;
-		motor[mechBackLeft] = 127;
-		motor[mechFrontRight] = 127;
-		motor[mechBackRight] = 127;
-	}
-	void spinDn() {
-		motor[mechFrontLeft] = 127;
-		motor[mechBackLeft] = 127;
-		motor[mechFrontRight] = 127;
-		motor[mechBackRight] = 127;
-	}
-	void shootAll() {
-		motor[Belt] = 127;
-		wait(3);
-		motor[Belt] = 0;
-	}
+	wait(time_sec);
+}
+void spinUp(float time_sec) {
+	motor[mechFrontLeft] = 127;
+	motor[mechBackLeft] = 127;
+	motor[mechFrontRight] = 127;
+	motor[mechBackRight] = 127;
+
+	wait(time_sec);
+}
+void spinDn() {
+	motor[mechFrontLeft] = 127;
+	motor[mechBackLeft] = 127;
+	motor[mechFrontRight] = 127;
+	motor[mechBackRight] = 127;
+}
+void beltUp(float time_sec) {
+	motor[Belt] = -127;
+	wait(0.2);
+	motor[Belt] = -80;
+	wait(time_sec);
+	motor[Belt] = 0;
+}
+
+void moveStop() {
+	motor[BackLeft] = 0;
+	motor[BackRight] = 0;
+	motor[FrontLeft] = 0;
+	motor[FrontRight] = 0;
+}
 
 task main()
 {
-	shootAll();
-	forwardHalf(2.5);
-	crabR(1);
-	forwardHalf(2);
-	spinUp();
-	crabL(1);
+	forwardHalf(5);
+	moveStop();
+	spinUp(3);
+	beltUp(5);
 	spinDn();
 
 }
