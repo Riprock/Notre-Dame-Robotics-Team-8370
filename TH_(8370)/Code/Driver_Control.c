@@ -90,6 +90,10 @@ task autonomous()
 	{
 	motor[belt] = 0;
 	}
+	while(time1[T1] < 12000)
+	{
+	motor[belt] = 127;
+	}
 	AutonomousCodePlaceholderForTesting();
 }
 
@@ -129,15 +133,15 @@ task usercontrol()
 		*/
 		while (vexRT[Btn5U] == 1)
 		{
-			motor(rightShootB) = -82;
-			motor(leftShootB) = 82;
-			motor(rightShootA) = -82;
-			motor(leftShootA) = 82;
+			motor(rightShootB) = -75;
+			motor(leftShootB) = 75;
+			motor(rightShootA) = -75;
+			motor(leftShootA) = 75;
 		}
 		while (vexRT[Btn5D] == 1)
 		{
 			motor(rightShootB) = 0;
-			motor(leftShootB) = -0;
+			motor(leftShootB) = 0;
 			motor(rightShootA) = 0;
 			motor(leftShootA) = 0;
 		}
@@ -149,7 +153,7 @@ task usercontrol()
 		{
 			motor(belt) = 127;
 		}
-		while (vexRT[Btn6D] == 1)
+			while (vexRT[Btn6D] == 1)
 		{
 			motor(belt) = 0;
 		}
