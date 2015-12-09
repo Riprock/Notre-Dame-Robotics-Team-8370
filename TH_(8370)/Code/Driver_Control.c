@@ -57,7 +57,7 @@ task autonomous()
 		motor[rightDrive] = 63;
 		motor[leftDrive] = 63;
 	}
-	while(time1[T1] < 1650)
+	while(time1[T1] < 1800)
 	{
 		// turn
 		motor[rightDrive] = 63;
@@ -69,10 +69,10 @@ task autonomous()
 		motor[rightDrive] = 0;
 		motor[leftDrive] = 0;
 		// start shooters and belt
-		motor[rightShootA] = -82;
-		motor[rightShootB] = -82;
-		motor[leftShootA] = 82;
-		motor[leftShootA] = 82;
+		motor(rightShootB) = -72;
+		motor(leftShootB) = 72;
+		motor(rightShootA) = -72;
+		motor(leftShootA) = 72;
 	}
 	while(time1[T1] < 6650)
 	{
@@ -133,10 +133,10 @@ task usercontrol()
 		*/
 		while (vexRT[Btn5U] == 1)
 		{
-			motor(rightShootB) = -75;
-			motor(leftShootB) = 75;
-			motor(rightShootA) = -75;
-			motor(leftShootA) = 75;
+			motor(rightShootB) = -71;
+			motor(leftShootB) = 71;
+			motor(rightShootA) = -71;
+			motor(leftShootA) = 71;
 		}
 		while (vexRT[Btn5D] == 1)
 		{
@@ -165,7 +165,8 @@ task usercontrol()
 			motor(Ramp) = 60;
 			motor(Ramp2) = -60;
 			wait1Msec(1000);
-
+			motor(Ramp) = 0;
+			motor(Ramp2) = 0;
 		}
 
 		UserControlCodePlaceholderForTesting();
