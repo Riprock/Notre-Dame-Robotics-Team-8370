@@ -133,12 +133,21 @@ task usercontrol()
 		int RSy = vexRT[Ch2]; // ^
 		int RF = vexRT[Btn6U]; // Either 0 or 1
 		int RB = vexRT[Btn6D]; // ^
+		int LF = vexRT[Btn5U]; // ^
+		int LB = vexRT[Btn5D]; // ^
 
-		// Move at full speed
-		motor[FrontLeft] = LSy - LSx;
-		motor[BackLeft] = LSy - LSx;
-		motor[FrontRight] = LSy + LSx;
-		motor[BackRight] = LSy + LSx;
+		// Move at half speed unless a left trigger is pressed
+		if (LF || LB) {
+			motor[FrontLeft] = LSy - LSx;
+			motor[BackLeft] = LSy - LSx;
+			motor[FrontRight] = LSy + LSx;
+			motor[BackRight] = LSy + LSx;
+		} else {
+			motor[FrontLeft] = (LSy - LSx)/2;
+			motor[BackLeft] = (LSy - LSx)/2;
+			motor[FrontRight] = (LSy + LSx)/2;
+			motor[BackRight] = (LSy + LSx)/2;
+		}
 
 		// Right Stick controls ball belt.
 		motor[Belt] = RSy;
