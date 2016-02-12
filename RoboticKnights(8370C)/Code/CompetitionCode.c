@@ -47,7 +47,7 @@ void pre_auton()
 task autonomous()
 {
 	clearTimer(T1);
-	// time less than 1 second
+	// time  less than 1 second
 		motor(rightShootB) = 75;
 		motor(leftShootB) = 75;
 		motor(rightShootA) = 75;
