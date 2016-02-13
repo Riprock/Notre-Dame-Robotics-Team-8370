@@ -2,13 +2,15 @@
 
 An actively updated list of things to do to ensure better reliability, consistency, and accuracy of th_.
 
-Hardware
-*lifting
-*better drive
-*accuracy
+Options are listed below to help each one
 
-Software
-*accuracy
-*autonomous
-*lifting
-*rewiring
+#Driving
+	* Change to 4 motor drive on each wheel
+
+#Consistancy
+	* Upgrade to Turbo Gears, fix gear ratio to accomedate it
+	* test current design a lot
+#Accurracy
+	* testing, and programming optimal speed
+#Autonomous
+	* test Autonomous a lot 
