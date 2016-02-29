@@ -55,8 +55,7 @@ task autonomous()
 	motor(topShootL) = 127;
 	motor(bottomShootL) = 127;
 
-
-	while(time[T1} < 3000)
+	while(time1[T1] < 3000)
 {
 	motor[belt] = 0;
 }
@@ -137,6 +136,14 @@ while (true)
 		motor(topShootL) = 0;
 		motor(bottomShootL) = 0;
 	}
+	// HALF
+	while (vexRT[Btn7D] == 1)
+	{
+		motor(topShootR) = 64;
+		motor(bottomShootR) = 64;
+		motor(topShootL) = 64;
+		motor(bottomShootL) = 64;
+	}
 
 	/*
 	* Belt
@@ -145,8 +152,10 @@ while (true)
 	{
 		motor(belt) = 127;
 	}
-	while (vexRT[Btn6U] == 1)
+	while (vexRT[Btn8D] == 1)
 	{
+		motor(belt) = -127;
+	} while (vexRT[Btn8D] == 0 && vexRT[Btn8U] == 0){
 		motor(belt) = 0;
 	}
 
