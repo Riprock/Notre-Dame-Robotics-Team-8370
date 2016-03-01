@@ -89,10 +89,10 @@ task usercontrol()
 		*/
 		while (vexRT[Btn7U] == 1)
 		{
-			motor(lst) = 127;
-			motor(lsb) = 127;
-			motor(rst) = 127;
-			motor(rsb) = 127;
+			motor(lst) = 80;
+			motor(lsb) = 80;
+			motor(rst) = 80;
+			motor(rsb) = 80;
 		}
 
 		while (vexRT[Btn5U] == 1)
@@ -103,19 +103,30 @@ task usercontrol()
 			motor(rsb) = 0;
 		}
 
+		while (vexRT[Btn6U] == 1)
+		{
+			motor(belt) = 127;
+		}
+
+		while (vexRT[Btn6D] == 1)
+		{
+			motor(belt) = 0;
+		}
+
+
 		while (vexRT[Btn8U] == 1)
 		{
 			clearTimer(T1);
 			// time less than 1 second
 
-			while(time1[T1] < 750)
+			while(time1[T1] < 1450)
 			{
 				motor(bld) = -80;
 				motor(fld) = -80;
 				motor(brd) = -80;
 				motor(frd) = -80;
 			}
-			while(time1[T1] < 755)
+			while(time1[T1] < 1435)
 			{
 				motor(brd) = 40;
 				motor(frd) = 40;
@@ -126,14 +137,14 @@ task usercontrol()
 			clearTimer(T1);
 			// time less than 1 second
 
-			while(time1[T1] < 6000)
+			while(time1[T1] < 9000)
 			{
 				motor(bld) = 127;
 				motor(fld) = 127;
 				motor(brd) = 127;
 				motor(frd) = 127;
 			}
-			while(time1[T1] < 6750)
+			while(time1[T1] < 9750)
 			{
 				motor(bld) = -80;
 				motor(fld) = -80;
