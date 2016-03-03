@@ -48,10 +48,32 @@ void pre_auton()
 
 task autonomous()
 {
+			clearTimer(T1);
+			// time less than 1 second
+
+			while(time1[T1] < 9000)
+			{
+				motor(bld) = 127;
+				motor(fld) = 127;
+				motor(brd) = 127;
+				motor(frd) = 127;
+			}
+			while(time1[T1] < 9750)
+			{
+				motor(bld) = -80;
+				motor(fld) = -80;
+				motor(brd) = -80;
+				motor(frd) = -80;
+			}
+			while(time1[T1] < 6755)
+			{
+				motor(brd) = 40;
+				motor(frd) = 40;
+			}
 	AutonomousCodePlaceholderForTesting();
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 //
 //                                 User Control Task
 //
@@ -87,12 +109,36 @@ task usercontrol()
 		/*
 		* Shoot
 		*/
+		while (vexRT[Btn7L] == 1)
+		{
+			motor(lst) = 85;
+			motor(lsb) = 85;
+			motor(rst) = 85;
+			motor(rsb) = 85;
+		}
+
+		while (vexRT[Btn7D] == 1)
+		{
+			motor(lst) = 95;
+			motor(lsb) = 95;
+			motor(rst) = 95;
+			motor(rsb) = 95;
+		}
+
 		while (vexRT[Btn7U] == 1)
 		{
-			motor(lst) = 127;
-			motor(lsb) = 127;
-			motor(rst) = 127;
-			motor(rsb) = 127;
+			motor(lst) = 105;
+			motor(lsb) = 105;
+			motor(rst) = 105;
+			motor(rsb) = 105;
+		}
+
+		while (vexRT[Btn7R] == 1)
+		{
+			motor(lst) = 115;
+			motor(lsb) = 115;
+			motor(rst) = 115;
+			motor(rsb) = 115;
 		}
 
 		while (vexRT[Btn5U] == 1)
@@ -105,47 +151,80 @@ task usercontrol()
 
 		while (vexRT[Btn8U] == 1)
 		{
-			clearTimer(T1);
-			// time less than 1 second
-
-			while(time1[T1] < 750)
-			{
-				motor(bld) = -80;
-				motor(fld) = -80;
-				motor(brd) = -80;
-				motor(frd) = -80;
-			}
-			while(time1[T1] < 755)
-			{
-				motor(brd) = 40;
-				motor(frd) = 40;
-			}
+			motor(belt) = 127;
 		}
-		while (vexRT[Btn8R] == 1)
+
+		while (vexRT[Btn8L] == 1)
 		{
-			clearTimer(T1);
+			motor(belt) = 0;
+		}
+
+
+		while (vexRT[Btn8D] == 1)
+		{
+			motor(belt) = -127;
+		}
+
+		while (vexRT[Btn8R] == 1 )
+		{
+					clearTimer(T1);
 			// time less than 1 second
 
 			while(time1[T1] < 6000)
 			{
-				motor(bld) = 127;
-				motor(fld) = 127;
+				motor(bld) = 80;
+				motor(fld) = 80;
 				motor(brd) = 127;
 				motor(frd) = 127;
 			}
-			while(time1[T1] < 6750)
+			while(time1[T1] < 6700)
 			{
-				motor(bld) = -80;
-				motor(fld) = -80;
-				motor(brd) = -80;
-				motor(frd) = -80;
+				motor(bld) = -50;
+				motor(fld) = -50;
+				motor(brd) = -127;
+				motor(frd) = -127;
 			}
-			while(time1[T1] < 6755)
+				motor(bld) = 0;
+				motor(fld) = 0;
+				motor(brd) = 0;
+				motor(frd) = 0;
+				motor(lst) = 85;
+				motor(lsb) = 85;
+				motor(rst) = 85;
+				motor(rsb) = 85;
+			while(time1 [T1] < 8025)
 			{
-				motor(brd) = 40;
-				motor(frd) = 40;
+				motor(belt) = 0;
 			}
+			while(time1 [T1] < 8525)
+			{
+				motor(belt) = 127;
+			}
+			while(time1 [T1] < 9525)
+			{
+				motor(belt) = 0;
+			}
+			while(time1 [T1] < 10025)
+			{
+				motor(belt) = 127;
+			}
+			while(time1 [T1] < 11025)
+			{
+				motor(belt) = 0;
+			}
+			while(time1 [T1] < 11525)
+			{
+				motor(belt) = 127;
+			}
+			while(time1 [T1] < 13025)
+			{
+				motor(belt) = 0;
+			}
+				motor(lst) = 0;
+				motor(lsb) = 0;
+				motor(rst) = 0;
+				motor(rsb) = 0;
 		}
-		UserControlCodePlaceholderForTesting();
 	}
+	UserControlCodePlaceholderForTesting();
 }
