@@ -48,7 +48,28 @@ void pre_auton()
 
 task autonomous()
 {
-	AutonomousCodePlaceholderForTesting();
+				clearTimer(T1);
+			// time less than 1 second
+
+			while(time1[T1] < 9000)
+			{
+				motor(bld) = 127;
+				motor(fld) = 127;
+				motor(brd) = 127;
+				motor(frd) = 127;
+			}
+			while(time1[T1] < 9750)
+			{
+				motor(bld) = -80;
+				motor(fld) = -80;
+				motor(brd) = -80;
+				motor(frd) = -80;
+			}
+			while(time1[T1] < 6755)
+			{
+				motor(brd) = 40;
+				motor(frd) = 40;
+			}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -87,12 +108,36 @@ task usercontrol()
 		/*
 		* Shoot
 		*/
+		while (vexRT[Btn7L] == 1)
+		{
+			motor(lst) = 85;
+			motor(lsb) = 85;
+			motor(rst) = 85;
+			motor(rsb) = 85;
+		}
+
+		while (vexRT[Btn7D] == 1)
+		{
+			motor(lst) = 95;
+			motor(lsb) = 95;
+			motor(rst) = 95;
+			motor(rsb) = 95;
+		}
+
 		while (vexRT[Btn7U] == 1)
 		{
-			motor(lst) = 80;
-			motor(lsb) = 80;
-			motor(rst) = 80;
-			motor(rsb) = 80;
+			motor(lst) = 105;
+			motor(lsb) = 105;
+			motor(rst) = 105;
+			motor(rsb) = 105;
+		}
+
+		while (vexRT[Btn7R] == 1)
+		{
+			motor(lst) = 115;
+			motor(lsb) = 115;
+			motor(rst) = 115;
+			motor(rsb) = 115;
 		}
 
 		while (vexRT[Btn5U] == 1)
@@ -103,60 +148,20 @@ task usercontrol()
 			motor(rsb) = 0;
 		}
 
-		while (vexRT[Btn6U] == 1)
+		while (vexRT[Btn8U] == 1)
 		{
 			motor(belt) = 127;
 		}
 
-		while (vexRT[Btn6D] == 1)
+		while (vexRT[Btn8L] == 1)
 		{
 			motor(belt) = 0;
 		}
 
 
-		while (vexRT[Btn8U] == 1)
+		while (vexRT[Btn8D] == 1)
 		{
-			clearTimer(T1);
-			// time less than 1 second
-
-			while(time1[T1] < 1450)
-			{
-				motor(bld) = -80;
-				motor(fld) = -80;
-				motor(brd) = -80;
-				motor(frd) = -80;
-			}
-			while(time1[T1] < 1435)
-			{
-				motor(brd) = 40;
-				motor(frd) = 40;
-			}
+			motor(belt) = -127;
 		}
-		while (vexRT[Btn8R] == 1)
-		{
-			clearTimer(T1);
-			// time less than 1 second
-
-			while(time1[T1] < 9000)
-			{
-				motor(bld) = 127;
-				motor(fld) = 127;
-				motor(brd) = 127;
-				motor(frd) = 127;
-			}
-			while(time1[T1] < 9750)
-			{
-				motor(bld) = -80;
-				motor(fld) = -80;
-				motor(brd) = -80;
-				motor(frd) = -80;
-			}
-			while(time1[T1] < 6755)
-			{
-				motor(brd) = 40;
-				motor(frd) = 40;
-			}
-		}
-		UserControlCodePlaceholderForTesting();
 	}
 }
