@@ -1,2 +1,3 @@
 # Robotics-Club
 Notre Dame Robotics Club Code for Website, Robots, and more...
+We are teh notre dame HS ROBOTICS TEAM
