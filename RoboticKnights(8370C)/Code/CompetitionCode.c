@@ -48,6 +48,7 @@ void pre_auton()
 
 task autonomous()
 {
+
 	clearTimer(T1);
 	// time less than 1 second
 	motor(topShootR) = 127;
@@ -55,32 +56,13 @@ task autonomous()
 	motor(topShootL) = 127;
 	motor(bottomShootL) = 127;
 
-	while(time1[T1] < 3000)
-{
-	motor[belt] = 0;
-}
+	while (true) {
+		if(time1[T1] > 5000) {
+			motor[belt] = 127;
+		}
+	}
 
-while(time1[T1] < 4000)
-{
-	// turn on belt
-	motor[belt] = 127;
-}
 
-while(time1[T1] < 5000)
-{
-	// turn on belt
-	motor[belt] = 0;
-}
-while(time1[T1] < 6000)
-{
-	// turn on belt
-	motor[belt] = 127;
-}
-while(time1[T1] < 7000)
-{
-	// turn on belt
-	motor[belt] = 0;
-}
 AutonomousCodePlaceholderForTesting();
 }
 
@@ -112,10 +94,17 @@ while (true)
 	/*
 	* DRIVE
 	*/
-	motor[frontDriveL] = RSy; // Left Motor
+	if (vexRT[Btn5D] != 1) {
+	motor[frontDriveL] = RSy/2;
+	motor[backDriveL] = RSy/2;
+	motor[frontDriveR] = LSy/2;
+	motor[backDriveR] = LSy/2;
+		} else {
+	motor[frontDriveL] = RSy;
 	motor[backDriveL] = RSy;
 	motor[frontDriveR] = LSy;
-	motor[backDriveR] = LSy; // Right Motor
+	motor[backDriveR] = LSy;
+		}
 
 	/*
 	* Shoot
@@ -139,10 +128,10 @@ while (true)
 	// HALF
 	while (vexRT[Btn7D] == 1)
 	{
-		motor(topShootR) = 64;
-		motor(bottomShootR) = 64;
-		motor(topShootL) = 64;
-		motor(bottomShootL) = 64;
+		motor(topShootR) = 48;
+		motor(bottomShootR) = 48;
+		motor(topShootL) = 48;
+		motor(bottomShootL) = 48;
 	}
 
 	/*
