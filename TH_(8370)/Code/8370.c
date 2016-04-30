@@ -85,8 +85,8 @@ task autonomous()
 task usercontrol()
 {
 	// User control code here, inside the loop
-
-
+	int a = 80;
+	
 	while (true)
 	{
 		// This is the main execution loop for the user control program. Each time through the loop
@@ -127,6 +127,7 @@ task usercontrol()
 
 		while (vexRT[Btn7U] == 1)
 		{
+<<<<<<< HEAD
 			motor(lst) = 105;
 			motor(lsb) = 105;
 			motor(rst) = 105;
@@ -139,6 +140,12 @@ task usercontrol()
 			motor(lsb) = 115;
 			motor(rst) = 115;
 			motor(rsb) = 115;
+=======
+			motor(lst) = a;
+			motor(lsb) = a;
+			motor(rst) = a;
+			motor(rsb) = a;
+>>>>>>> origin/Addedvarforspeed
 		}
 
 		while (vexRT[Btn5U] == 1)
