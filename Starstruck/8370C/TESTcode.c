@@ -1,5 +1,4 @@
 #pragma config(Sensor, dgtl1,  backSonar,      sensorSONAR_inch)
-#pragma config(Sensor, dgtl3,  LED,            sensorDigitalOut)
 #pragma config(Sensor, dgtl9,  leftRight,      sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, forwardBack,    sensorQuadEncoder)
 #pragma config(Motor,  port2,           frontm,        tmotorVex393_MC29, openLoop, reversed)
@@ -10,59 +9,63 @@
 
 float forwardSpeed;
 float sidewaysSpeed;
-int distance;
 float speedDivisor;
-
 float turnSpeed;
 
+/*
+* Stops all robot movement.
+*/
 void stopm(){
 	motor[rightm]=0;
 	motor[leftm]=0;
 	motor[frontm]=0;
 	motor[backm]=0;
 }
-
-void forward(float fdistance){
-	SensorValue[LED] = true;
+/*
+* Moves the robot forward idistance number of inches.
+*/
+void forward(float idistance){
 	SensorValue[forwardBack] = 0;
-	while (SensorValue[forwardBack] < 360 * (fdistance/17)){
+	while (SensorValue[forwardBack] < 360 * (idistance/17)){
 			motor[leftm] = 50;
 			motor[rightm] = 50;
 	}
 	stopm();
-	SensorValue[LED] = false;
 }
-
-void backward(float fdistance){
+/*
+* Moves the robot backward idistance number of inches.
+*/
+void backward(float idistance){
 	SensorValue[forwardBack] = 0;
-	while (SensorValue[leftRight] < 360 * (fdistance/17)){
+	while (SensorValue[leftRight] < 360 * (idistance/17)){
 			motor[leftm] = -50;
 			motor[rightm] = -50;
 	}
+	stopm();
 }
 
-void jonnie(){
-	motor[rightm]=forwardSpeed - turnSpeed;
-	motor[leftm]=forwardSpeed + turnSpeed;
-	motor[frontm]=sidewaysSpeed + turnSpeed;
-	motor[backm]=sidewaysSpeed - turnSpeed;
+/*
+* Moves the robot based upon controller input.
+*/
+void controllerMovement(){
+	// Determine movement speeds based on controller input
+	speedDivisor = 2+(2*vexRT[Btn6U]); // Upper Right trigger cuts speed in half
+	forwardSpeed = vexRT[Ch3] / speedDivisor; // Left stick determines forward...
+	sidewaysSpeed = vexRT[Ch4] / speedDivisor; // ...and sideways speeds
+	turnSpeed = vexRT[Ch1] / speedDivisor; // Right stick determines turning speed
+
+	// Apply speeds for each motor
+	motor[rightm] = forwardSpeed - turnSpeed;
+	motor[leftm] = forwardSpeed + turnSpeed;
+	motor[frontm] = sidewaysSpeed + turnSpeed;
+	motor[backm] = sidewaysSpeed - turnSpeed;
 }
 
 task main(){
-		forward(48);
 		while(true) {
-			SensorValue[LED] = false;
-			if (vexRT[Btn6U]==1){
-				speedDivisor = 4;
-			} else {
-			speedDivisor = 2;
-			}
-			forwardSpeed = vexRT[Ch3] / speedDivisor;
-			sidewaysSpeed = vexRT[Ch4] / speedDivisor;
 
-			turnSpeed = vexRT[Ch1] / speedDivisor;
+			controllerMovement();
+			wait1Msec(200); // Added to save battery for open house demonstration
 
-			//jonnie();
 	}
-	wait1Msec(3000);
 }
