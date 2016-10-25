@@ -95,23 +95,23 @@ task usercontrol()
 
     /*Drive- Tank Drive*/
     // left side
-    motor[frontLeft] = vexRT[Ch2];
-    motor[backLeft] = vexRT[Ch2];
+    motor[frontLeft] = vexRT[Ch3];
+    motor[backLeft] = vexRT[Ch3];
     // right side
 	  motor[frontRight] = vexRT[Ch2];
     motor[backRight] = vexRT[Ch2];
     // middle wheels
-    motor[middleLeft] = vexRT[Ch3];
-    motor[middleRight] = vexRT[Ch3];
+    motor[middleLeft] = vexRT[Ch1];
+    motor[middleRight] = vexRT[Ch1];
     /*Raise Arm Up*/
     while (true)
 		{
-     if(vexRT[Btn8L] == 1)
+     if(vexRT[Btn6U] == 1)
 			{
 				motor(armLeft) = 0;
 				motor(armRight) = 0;
 			}
-	 	 else if(vexRT[Btn8L] == 1)
+	 	 else if(vexRT[Btn6D] == 1)
 			{
 				motor(armLeft) = 0;
 				motor(armRight) = 0;
@@ -121,6 +121,7 @@ task usercontrol()
 				motor(armLeft) = 0;
 				motor(armRight) = 0;
 			}
+		}
     /* If neither of these buttons are pressed, motors stay at 0 (idle power)-- Don't change*/
 
     // DO NOT REMOVE BELOW WITHOUT ASKING ANISH.
