@@ -94,13 +94,34 @@ task usercontrol()
    /* Begin Driver Control Code*/
 
     /*Drive- Tank Drive*/
-    motor[frontLeft] = vexRT[Ch2] // left side
+    // left side
+    motor[frontLeft] = vexRT[Ch2];
+    motor[backLeft] = vexRT[Ch2];
     // right side
-  	// middle wheels
+	  motor[frontRight] = vexRT[Ch2];
+    motor[backRight] = vexRT[Ch2];
+    // middle wheels
+    motor[middleLeft] = vexRT[Ch3];
+    motor[middleRight] = vexRT[Ch3];
     /*Raise Arm Up*/
-    /*Raise Arm Down*/
-
-
+    while (true)
+		{
+     if(vexRT[Btn8L] == 1)
+			{
+				motor(armLeft) = 0;
+				motor(armRight) = 0;
+			}
+	 	 else if(vexRT[Btn8L] == 1)
+			{
+				motor(armLeft) = 0;
+				motor(armRight) = 0;
+			}
+			else
+			{
+				motor(armLeft) = 0;
+				motor(armRight) = 0;
+			}
+    /* If neither of these buttons are pressed, motors stay at 0 (idle power)-- Don't change*/
 
     // DO NOT REMOVE BELOW WITHOUT ASKING ANISH.
     UserControlCodePlaceholderForTesting();
