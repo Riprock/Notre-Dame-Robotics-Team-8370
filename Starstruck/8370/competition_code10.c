@@ -93,8 +93,8 @@ task usercontrol()
   {
    /* Begin Driver Control Code*/
 
-    /*Drive*/
-    // left side
+    /*Drive- Tank Drive*/
+    motor[frontLeft] = vexRT[Ch2] // left side
     // right side
   	// middle wheels
     /*Raise Arm Up*/
