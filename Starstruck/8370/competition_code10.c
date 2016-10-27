@@ -73,7 +73,21 @@ task autonomous()
 	/*Begin Autnomous code*/
 
 
-  // DO NOT REMOVE BELOW WITHOUT ASKING ANISH.
+	//Left square
+		// drive forward 1 sec
+		// Raise arm
+		// drive right x sec
+		// lower arm
+  	//
+
+	//Right square
+		// drive forward 1 sec
+		// Raise arm
+		// drive left x sec
+		// lower arm
+  	//
+
+	// DO NOT REMOVE BELOW WITHOUT ASKING ANISH.
   AutonomousCodePlaceholderForTesting();
 }
 
