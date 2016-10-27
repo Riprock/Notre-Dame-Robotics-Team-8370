@@ -71,7 +71,21 @@ void pre_auton()
 task autonomous()
 {
 	/*Begin Autnomous code*/
+clearTimer(T1);
+			// time less than 1 second
 
+			while(time1[T1] < 9000)
+			{
+
+			}
+			while(time1[T1] < 9750)
+			{
+
+			}
+			while(time1[T1] < 6755)
+			{
+
+			}
 
 	//Left square
 		// drive forward 1 sec
