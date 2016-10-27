@@ -126,13 +126,19 @@ task usercontrol()
     /*
     Drive- Arcade Drive
     */
-    motor[backRight] = (vexRT[Ch2] + vexRT[Ch1]);
-    motor[backLeft] = (vexRT[Ch2] + vexRT[Ch1]);// (y + x)
-		motor[frontRight] = (vexRT[Ch2] - vexRT[Ch1]); // (y - x)
-		motor[frontLeft] = (vexRT[Ch2] - vexRT[Ch1]);
+    motor[frontLeft] = vexRT[Ch2];
+    motor[backLeft] = vexRT[Ch2];
+    motor[frontRight] = vexRT[Ch2];
+    motor[backRight] = vexRT[Ch2];
+    
+	  
+    motor[backRight] = vexRT[Ch3]);
+    motor[backLeft] = vexRT[Ch3]);// (y + x)
+    motor[frontRight] = -vexRT[Ch3]); // (y - x)
+    motor[frontLeft] = -vexRT[Ch3]);
     // middle wheels- -- set motors to axis 3
-    motor[middleLeft] = vexRT[Ch3];
-    motor[middleRight] = vexRT[Ch3];
+    motor[middleLeft] = vexRT[Ch1];
+    motor[middleRight] = vexRT[Ch1];
 
     /*// left side-- set motors to axis 3
     motor[frontLeft] = vexRT[Ch3];
