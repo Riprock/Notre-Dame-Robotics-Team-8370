@@ -74,10 +74,6 @@ task autonomous()
 clearTimer(T1);
 			// time less than 1 second
 
-			while(time1[T1] < 9000)
-			{
-
-			}
 			while(time1[T1] < 9750)
 			{
 
@@ -89,10 +85,42 @@ clearTimer(T1);
 
 	//Left square
 		// drive forward 1 sec
+	
+			while(time1[T1] < 1000)
+			{
+				
+    				motor[frontLeft] = 127;
+    				motor[backLeft] = 127;
+    				motor[frontRight] = 127;
+    				motor[backRight] = 127;
+    
+			}	
 		// Raise arm
+			
+			while(time1[T1] < 1000)
+			{
+				
+				motor(armLeft) = 100;
+				motor(armLeft2) = 100;
+				motor(armRight) = 100;
+				motor(armRight2) = 100;	
+ 
+    
+			}
+	
+			while(time1[T1] < 1000)
+			{
+				
+				motor(armLeft) = 63;
+				motor(armLeft2) = 63;
+				motor(armRight) = 63;
+				motor(armRight2) = 63;	
+ 
+    
+			}
 		// drive right x sec
 		// lower arm
-  	//
+ 
 
 	//Right square
 		// drive forward 1 sec
