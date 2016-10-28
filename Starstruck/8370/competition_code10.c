@@ -72,55 +72,55 @@ task autonomous()
 {
 	/*Begin Autnomous code*/
 clearTimer(T1);
-			// time less than 1 second
-
-			while(time1[T1] < 9750)
-			{
-
-			}
-			while(time1[T1] < 6755)
-			{
-
-			}
-
 	//Left square
 		// drive forward 1 sec
-	
 			while(time1[T1] < 1000)
 			{
-				
+
     				motor[frontLeft] = 127;
     				motor[backLeft] = 127;
     				motor[frontRight] = 127;
     				motor[backRight] = 127;
-    
-			}	
-		// Raise arm
-			
-			while(time1[T1] < 1000)
-			{
-				
-				motor(armLeft) = 100;
-				motor(armLeft2) = 100;
-				motor(armRight) = 100;
-				motor(armRight2) = 100;	
- 
-    
+
 			}
-	
+		// Raise arm
+
 			while(time1[T1] < 1000)
 			{
-				
+
+				motor(armLeft) = 127;
+				motor(armLeft2) = 127;
+				motor(armRight) = 127;
+				motor(armRight2) = 127;
+
+
+			}
+
+			while(time1[T1] < 2000)
+			{
+
 				motor(armLeft) = 63;
 				motor(armLeft2) = 63;
 				motor(armRight) = 63;
-				motor(armRight2) = 63;	
- 
-    
+				motor(armRight2) = 63;
+
+
 			}
 		// drive right x sec
+
+
+			while(time1[T1] < 2000)
+			{
+
+				motor(armLeft) = 63;
+				motor(armLeft2) = 63;
+				motor(armRight) = 63;
+				motor(armRight2) = 63;
+
+
+			}
 		// lower arm
- 
+
 
 	//Right square
 		// drive forward 1 sec
@@ -159,16 +159,26 @@ task usercontrol()
     motor[backLeft] = vexRT[Ch2];
     motor[frontRight] = vexRT[Ch2];
     motor[backRight] = vexRT[Ch2];
-    
-	//turning-- set to axis 1
-    motor[backRight] = vexRT[Ch3]);
-    motor[backLeft] = vexRT[Ch3]);// (y + x)
-    motor[frontRight] = -vexRT[Ch3]); // (y - x)
-    motor[frontLeft] = -vexRT[Ch3]);
-    // middle wheels- -- set motors to axis 3
-    motor[middleLeft] = vexRT[Ch1];
-    motor[middleRight] = vexRT[Ch1];
 
+	//turning-- set to axis 1
+    motor[backRight] = vexRT[Ch3];
+    motor[backLeft] = vexRT[Ch3];// (y + x)
+    motor[frontRight] = -vexRT[Ch3]; // (y - x)
+    motor[frontLeft] = -vexRT[Ch3];
+    // middle wheels- -- set motors to axis 3
+    while (true)
+    {
+    	if(vexRT[Btn6U] == 1)	// if button 6U is pressed, arm goes down
+			{
+    	motor[middleLeft] = vexRT[Ch1];
+    	motor[middleRight] = vexRT[Ch1];
+			}
+			else
+			{
+			motor[middleLeft] = 0;
+    	motor[middleRight] = 0;
+			}
+		}
     /*// left side-- set motors to axis 3
     motor[frontLeft] = vexRT[Ch3];
     motor[backLeft] = vexRT[Ch3];
