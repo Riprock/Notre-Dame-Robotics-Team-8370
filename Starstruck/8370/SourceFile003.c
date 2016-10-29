@@ -69,55 +69,12 @@ void pre_auton()
 
 task autonomous()
 {
-	/*Begin Autnomous code*/
-clearTimer(T1);
-	//Left square
-		// drive forward 1 sec
-			while(time1[T1] < 1000)
-			{
-
-    				motor[frontLeft] = 127;
-    				motor[backLeft] = 127;
-    				motor[frontRight] = 127;
-    				motor[backRight] = 127;
-
-			}
-		// Raise arm
-
-			while(time1[T1] < 1000)
-			{
 
 				motor(armLeft) = 127;
 				motor(armLeft2) = 127;
-				motor(armRight) = 127;
-				motor(armRight2) = 127;
-
-
-			}
-
-			while(time1[T1] < 2000)
-			{
-
-				motor(armLeft) = 63;
-				motor(armLeft2) = 63;
-				motor(armRight) = 63;
-				motor(armRight2) = 63;
-
-
-			}
-		// drive right x sec
-
-
-			while(time1[T1] < 2000)
-			{
-
-				motor(armLeft) = 63;
-				motor(armLeft2) = 63;
-				motor(armRight) = 63;
-				motor(armRight2) = 63;
-
-
-			}
+				motor(armRight) = -127;
+				motor(armRight2) = -127;
+				wait1Msec(900);
 		// lower arm
 
 
@@ -160,7 +117,15 @@ task usercontrol()
 			{motor[middleLeft] = 0;}
 
 			/* Raise Arm*/
-     if(vexRT[Btn6U] == 1)	// if button 6U is pressed, arm goes down
+    if(vexRT[Btn7U] == 1)	// if button 6U is pressed, arm goes down
+			{
+				motor[armLeft] = 127;
+				motor[armLeft2] = 127;
+				motor[armRight] = -127;
+				motor[armRight2] = -127;
+				wait1Msec(900);
+			}
+		if(vexRT[Btn6U] == 1)	// if button 6U is pressed, arm goes down
 			{
 				motor[armLeft] = 127;
 				motor[armLeft2] = 127;
