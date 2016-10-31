@@ -74,7 +74,20 @@ task autonomous()
 				motor(armLeft2) = 127;
 				motor(armRight) = -127;
 				motor(armRight2) = -127;
-				wait1Msec(900);
+				wait1Msec(800);
+
+				motor(armLeft) = -127;
+				motor(armLeft2) = -127;
+				motor(armRight) = 127;
+				motor(armRight2) =127;
+				wait1Msec(700);
+
+
+    		motor[frontLeft] = -127;
+    		motor[backLeft] = -127;
+    		motor[frontRight] = -127;
+    		motor[backRight] = -127;
+				wait1Msec(3000);
 		// lower arm
 
 
@@ -124,6 +137,13 @@ task usercontrol()
 				motor[armRight] = -127;
 				motor[armRight2] = -127;
 				wait1Msec(900);
+			}
+		if(vexRT[Btn5D] == 1)	// if button 6U is pressed, arm goes down
+			{
+				motor[armLeft] = 100;
+				motor[armLeft2] = 100;
+				motor[armRight] = -100;
+				motor[armRight2] = -100;
 			}
 		if(vexRT[Btn6U] == 1)	// if button 6U is pressed, arm goes down
 			{
