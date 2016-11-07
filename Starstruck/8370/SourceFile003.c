@@ -72,15 +72,25 @@ void pre_auton()
 task autonomous()
 {
 	//raise arm ( defend level)
-  //drive forward 2 tiles
-	// back up 1 tile
+  	motor[armLeft] = 127;
+	motor[armLeft2] = 127;
+	motor[armRight] = -127;
+	motor[armRight2] = -127;
+	wait1Msec(900);
 
+	//drive forward 2 tiles
+	motor[backRight]=127
+	motor[backleft]=127
+	motor[frontRight]=127
+	motor[frontLeft]=127
+	wait1Msec(1200);
+	// back up 1 tile
+	motor[backRight]=-127
+	motor[backleft]=-127
+	motor[frontRight]=-127
+	motor[frontLeft]=-127
+	wait1Msec(900);
 	//Right square
-		// drive forward 1 sec
-		// Raise arm
-		// drive left x sec
-		// lower arm
-  	//
 
 	// DO NOT REMOVE BELOW WITHOUT ASKING ANISH.
   AutonomousCodePlaceholderForTesting();
@@ -104,9 +114,9 @@ task usercontrol()
   {
 
 
-  		float SpeedDivisor = 1;
-  		float backLimit = SensorValue[back1] + SensorValue[back2];
-			float LeftDrive = vexRT[Ch3]/SpeedDivisor, RightDrive = vexRT[Ch2]/SpeedDivisor;
+  	float SpeedDivisor = 1;
+  	float backLimit = SensorValue[back1] + SensorValue[back2];
+	float LeftDrive = vexRT[Ch3]/SpeedDivisor, RightDrive = vexRT[Ch2]/SpeedDivisor;
     	motor[frontLeft] = LeftDrive;
     	motor[backLeft] = LeftDrive;
     	motor[frontRight] = RightDrive;
