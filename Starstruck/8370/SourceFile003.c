@@ -1,3 +1,5 @@
+#pragma config(Sensor, dgtl11, back2,          sensorTouch)
+#pragma config(Sensor, dgtl12, back1,          sensorTouch)
 #pragma config(Motor,  port1,           backRight,     tmotorVex393_HBridge, openLoop, driveRight)
 #pragma config(Motor,  port2,           frontRight,    tmotorVex393_MC29, openLoop, driveRight)
 #pragma config(Motor,  port3,           frontLeft,     tmotorVex393_MC29, openLoop, driveLeft)
@@ -69,27 +71,9 @@ void pre_auton()
 
 task autonomous()
 {
-
-				motor(armLeft) = 127;
-				motor(armLeft2) = 127;
-				motor(armRight) = -127;
-				motor(armRight2) = -127;
-				wait1Msec(800);
-
-				motor(armLeft) = -127;
-				motor(armLeft2) = -127;
-				motor(armRight) = 127;
-				motor(armRight2) =127;
-				wait1Msec(700);
-
-
-    		motor[frontLeft] = -127;
-    		motor[backLeft] = -127;
-    		motor[frontRight] = -127;
-    		motor[backRight] = -127;
-				wait1Msec(3000);
-		// lower arm
-
+	//raise arm ( defend level)
+  //drive forward 2 tiles
+	// back up 1 tile
 
 	//Right square
 		// drive forward 1 sec
@@ -119,18 +103,33 @@ task usercontrol()
   while (true)
   {
 
-    	motor[frontLeft] = vexRT[Ch3];
-    	motor[backLeft] = vexRT[Ch3];
-    	motor[frontRight] = vexRT[Ch2];
-    	motor[backRight] = vexRT[Ch2];
 
+  		float SpeedDivisor = 1;
+  		float backLimit = SensorValue[back1] + SensorValue[back2];
+			float LeftDrive = vexRT[Ch3]/SpeedDivisor, RightDrive = vexRT[Ch2]/SpeedDivisor;
+    	motor[frontLeft] = LeftDrive;
+    	motor[backLeft] = LeftDrive;
+    	motor[frontRight] = RightDrive;
+    	motor[backRight] = RightDrive;
+/*
     	if(vexRT[Btn5U] == 1)	// if button 6U is pressed, arm goes down
 			{ motor[middleLeft] = vexRT[Ch1];}
 			else
 			{motor[middleLeft] = 0;}
+			*/
+			/* combo moves*/
 
-			/* Raise Arm*/
-    if(vexRT[Btn7U] == 1)	// if button 6U is pressed, arm goes down
+		// charge position
+  		if(vexRT[Btn7U] == 1 && backLimit == 0)
+    	{
+				motor[armLeft] = 127;
+				motor[armLeft2] = 127;
+				motor[armRight] = -127;
+				motor[armRight2] = -127;
+				wait1Msec(900);
+			}
+			// defend position
+			if(vexRT[Btn7D] == 1 && backLimit == 0)
 			{
 				motor[armLeft] = 127;
 				motor[armLeft2] = 127;
@@ -138,21 +137,65 @@ task usercontrol()
 				motor[armRight2] = -127;
 				wait1Msec(900);
 			}
+				// hold (45) position
+		if(vexRT[Btn7L] == 1 && backLimit == 0)
+			{
+				motor[armLeft] = 127;
+				motor[armLeft2] = 127;
+				motor[armRight] = -127;
+				motor[armRight2] = -127;
+				wait1Msec(600);
+			}
+				// dump move
+		if(vexRT[Btn7R] == 1 && backLimit == 0)
+			{
+				motor[armLeft] = 127;
+				motor[armLeft2] = 127;
+				motor[armRight] = -127;
+				motor[armRight2] = -127;
+				wait1Msec(1200);
+			}
+				// Recover move
+		if(vexRT[Btn8U] == 1)	// if button 6U is pressed, arm goes down
+			{
+				motor[armLeft] = -127;
+				motor[armLeft2] = -127;
+				motor[armRight] = 127;
+				motor[armRight2] = 127;
+				wait1Msec(400);
+			}
+
+
+			/*
+
+			TRIGGERS
+
+
+			*/
+			//slow arm
+
+		if(vexRT[Btn5U] == 1 && backLimit == 0)	// if button 6U is pressed, arm goes down
+			{
+				motor[armLeft] = 115;
+				motor[armLeft2] = 115;
+				motor[armRight] = -115;
+				motor[armRight2] = -115;
+			}
 		if(vexRT[Btn5D] == 1)	// if button 6U is pressed, arm goes down
 			{
-				motor[armLeft] = 100;
-				motor[armLeft2] = 100;
-				motor[armRight] = -100;
-				motor[armRight2] = -100;
+				motor[armLeft] = -115;
+				motor[armLeft2] = -115;
+				motor[armRight] = 115;
+				motor[armRight2] = 115;
 			}
-		if(vexRT[Btn6U] == 1)	// if button 6U is pressed, arm goes down
+			// fast arm
+		if(vexRT[Btn6U] == 1 && backLimit == 0 )	// if button 6U is pressed, arm goes down
 			{
 				motor[armLeft] = 127;
 				motor[armLeft2] = 127;
 				motor[armRight] = -127;
 				motor[armRight2] = -127;
 			}
-			/* Lower Arm*/
 	 	 else if(vexRT[Btn6D] == 1) // if button 6D is pressed, arm goes down
 			{
 				motor[armLeft] = -127;
@@ -160,14 +203,15 @@ task usercontrol()
 				motor[armRight] = 127;
 				motor[armRight2] = 127;
 			}
-			/* Hold arm in position*/
-			else // if no button is pressed the motor values are 0 (idle)
+		else // if button 6D is pressed, arm goes down
 			{
 				motor[armLeft] = 0;
 				motor[armLeft2] = 0;
 				motor[armRight] = 0;
 				motor[armRight2] = 0;
 			}
+			/* Hold arm in position*/
+
 	}
     // DO NOT REMOVE BELOW WITHOUT ASKING ANISH.
     UserControlCodePlaceholderForTesting();
