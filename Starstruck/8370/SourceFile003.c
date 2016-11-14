@@ -1,5 +1,6 @@
-#pragma config(Sensor, dgtl11, back2,          sensorTouch)
-#pragma config(Sensor, dgtl12, back1,          sensorTouch)
+#pragma config(Sensor, dgtl9,  ArmEncoder,     sensorQuadEncoder)
+#pragma config(Sensor, dgtl11, ArmTouch2,      sensorTouch)
+#pragma config(Sensor, dgtl12, ArmTouch1,      sensorTouch)
 #pragma config(Motor,  port1,           backRight,     tmotorVex393_HBridge, openLoop, driveRight)
 #pragma config(Motor,  port2,           frontRight,    tmotorVex393_MC29, openLoop, driveRight)
 #pragma config(Motor,  port3,           frontLeft,     tmotorVex393_MC29, openLoop, driveLeft)
@@ -71,24 +72,32 @@ void pre_auton()
 
 task autonomous()
 {
-	//raise arm ( defend level)
-  	motor[armLeft] = 127;
-	motor[armLeft2] = 127;
-	motor[armRight] = -127;
-	motor[armRight2] = -127;
-	wait1Msec(900);
+	//raise arm 90 degrees (to knock stars)
+	SensorValue[ArmEncoder] = 0;
+	while(SensorValue[ArmEncoder] < 90) {
+		motor[armLeft] = 127;
+		motor[armLeft2] = 127;
+		motor[armRight] = -127;
+		motor[armRight2] = -127;
+	}
+	// Stop arm
+	motor[armLeft] = 0;
+	motor[armLeft2] = 0;
+	motor[armRight] = 0;
+	motor[armRight2] = 0;
 
-	//drive forward 2 tiles
-	motor[backRight]=127
-	motor[backleft]=127
-	motor[frontRight]=127
-	motor[frontLeft]=127
+	// drive forward 2 tiles
+	motor[backRight]=127;
+	motor[backLeft]=127;
+	motor[frontRight]=127;
+	motor[frontLeft]=127;
 	wait1Msec(1200);
+
 	// back up 1 tile
-	motor[backRight]=-127
-	motor[backleft]=-127
-	motor[frontRight]=-127
-	motor[frontLeft]=-127
+	motor[backRight]=-127;
+	motor[backLeft]=-127;
+	motor[frontRight]=-127;
+	motor[frontLeft]=-127;
 	wait1Msec(900);
 	//Right square
 
@@ -113,23 +122,24 @@ task usercontrol()
   while (true)
   {
 
+	  	float SpeedDivisor = 1;
+	  	float backLimit = SensorValue[ArmTouch1] + SensorValue[ArmTouch2];
+			float LeftDrive = vexRT[Ch3]/SpeedDivisor, RightDrive = vexRT[Ch2]/SpeedDivisor;
+	  	motor[frontLeft] = LeftDrive;
+	  	motor[backLeft] = LeftDrive;
+	  	motor[frontRight] = RightDrive;
+	  	motor[backRight] = RightDrive;
 
-  	float SpeedDivisor = 1;
-  	float backLimit = SensorValue[back1] + SensorValue[back2];
-	float LeftDrive = vexRT[Ch3]/SpeedDivisor, RightDrive = vexRT[Ch2]/SpeedDivisor;
-    	motor[frontLeft] = LeftDrive;
-    	motor[backLeft] = LeftDrive;
-    	motor[frontRight] = RightDrive;
-    	motor[backRight] = RightDrive;
-/*
+			/*
     	if(vexRT[Btn5U] == 1)	// if button 6U is pressed, arm goes down
 			{ motor[middleLeft] = vexRT[Ch1];}
 			else
 			{motor[middleLeft] = 0;}
 			*/
+
 			/* combo moves*/
 
-		// charge position
+			// charge position
   		if(vexRT[Btn7U] == 1 && backLimit == 0)
     	{
 				motor[armLeft] = 127;
@@ -174,7 +184,6 @@ task usercontrol()
 				motor[armRight2] = 127;
 				wait1Msec(400);
 			}
-
 
 			/*
 
