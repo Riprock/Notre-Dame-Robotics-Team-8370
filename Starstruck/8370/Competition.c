@@ -91,7 +91,7 @@ task autonomous()
 	motor[backLeft]=127;
 	motor[frontRight]=127;
 	motor[frontLeft]=127;
-	wait1Msec(1200);
+	wait1Msec(1600);
 
 	// back up 1 tile
 	motor[backRight]=-127;
@@ -99,8 +99,13 @@ task autonomous()
 	motor[frontRight]=-127;
 	motor[frontLeft]=-127;
 	wait1Msec(900);
-	//Right square
 
+	//Right square
+	motor[backRight]=0;
+	motor[backLeft]=0;
+	motor[frontRight]=0;
+	motor[frontLeft]=0;
+	wait1Msec(900);
 	// DO NOT REMOVE BELOW WITHOUT ASKING ANISH.
   AutonomousCodePlaceholderForTesting();
 }
