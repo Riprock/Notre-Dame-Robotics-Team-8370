@@ -1,8 +1,8 @@
 #pragma config(Sensor, dgtl9,  backe,          sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, righte,         sensorQuadEncoder)
 #pragma config(Motor,  port2,           back,          tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port3,           right,         tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port4,           front,         tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port3,           right,         tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port4,           front,         tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port5,           left,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port6,           crighttop,     tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port7,           clefttop,      tmotorVex393_MC29, openLoop, reversed)
@@ -32,14 +32,22 @@ task usercontrol()
 {
 		while(True){
 		/*Driving*/
+		float y = 1;
+		float x = 1;
+		if (vexRT[Ch1] < 0){
+				x = 1;
+				y = -1;
+			} else { if (vexRT[Ch1] > 0){
+				Y = 1;
+				x = -1;
+			}
 		float SpeedDivisor = 2-vexRT[Btn6U];
 		float ForwDrive = vexRT[Ch3]/SpeedDivisor;
 		float SideDrive = vexRT[Ch4]/SpeedDivisor;
-		motor[left] = ForwDrive;
-		motor[right] = ForwDrive;
-		motor[front] = SideDrive;
-		motor[back] = SideDrive;
-
+		motor[left] = ForwDrive * y;
+		motor[right] = ForwDrive * x;
+		motor[front] = -SideDrive;
+		motor[back] = -SideDrive;
 		/*Moving Arm*/
 
 		float up = vexRT[Btn6D];
@@ -50,10 +58,4 @@ task usercontrol()
 		motor[clefttop] = 127*(up-down);
 		motor[cleftbot] = 127*(up-down);
 	}
-
-  while (true)
-  {
-
-    UserControlCodePlaceholderForTesting();
-  }
-}
+}}
