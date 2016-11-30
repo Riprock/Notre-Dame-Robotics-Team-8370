@@ -172,7 +172,7 @@ task autonomous()
 					stop_all(500);
 					arm_down(3);
 					stop_all(500);
-					drive_forward(1500);
+					drive_forward(1800);
 					stop_all(500);
 					cube_shoot();
 					// positioning, side of arm aligned with first tab crossing, midsection of wheel aligned with second crossing of tabs
