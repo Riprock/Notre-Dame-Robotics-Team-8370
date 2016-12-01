@@ -34,7 +34,7 @@ task usercontrol()
 	float ForwDrive = vexRT[Ch3]/SpeedDivisor;
 	float SideDrive = vexRT[Ch4]/SpeedDivisor;
 	float turnSpeed = vexRT[Ch1] / speedDivisor;
-	
+
 	while(True){
 		/*Driving*/
 
@@ -56,4 +56,4 @@ task usercontrol()
 		motor[clefttop] = 127*(up-down);
 		motor[cleftbot] = 127*(up-down);
 	}
-}}
+}
