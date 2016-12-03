@@ -168,7 +168,7 @@ task autonomous()
 					stop_all(500);
 					drive_forward(1500);
 					stop_all(500);
-					drive_backward(700);
+					drive_backward(500);
 					stop_all(500);
 					arm_down(3);
 					stop_all(500);
