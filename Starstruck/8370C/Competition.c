@@ -1,9 +1,9 @@
 #pragma config(Sensor, dgtl9,  backe,          sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, righte,         sensorQuadEncoder)
-#pragma config(Motor,  port2,           back,          tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port3,           right,         tmotorVex393_MC29, openLoop, reversed)
-#pragma config(Motor,  port4,           front,         tmotorVex393_MC29, openLoop)
-#pragma config(Motor,  port5,           left,          tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port2,           back,          tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port3,           right,         tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port4,           front,         tmotorVex393_MC29, openLoop, reversed)
+#pragma config(Motor,  port5,           left,          tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port6,           crighttop,     tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port7,           clefttop,      tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port8,           crightbot,     tmotorVex393_MC29, openLoop)
@@ -16,6 +16,53 @@
 
 #include "Vex_Competition_Includes.c"
 
+/*
+*	Stops all motors
+*/
+void stopm() {
+		motor[front] = 0;
+		motor[back] = 0;
+		motor[left] = 0;
+		motor[right] = 0;
+
+		motor[crighttop] = 0;
+		motor[crightbot] = 0;
+		motor[clefttop] = 0;
+		motor[cleftbot] = 0;
+}
+
+/*
+* Moves the robot in direction (1 or -1) idistance number of inches.
+*/
+void forbac(float idistance, int speed, int direction){
+	SensorValue[righte] = 0;
+	while (abs(SensorValue[righte]) < 360 * (idistance/17)){
+			motor[left] = (speed * direction) - 50; // Additions to equalize drift
+			motor[right] = (speed * direction) + 50;
+	}
+	stopm();
+}
+
+void turn(int direction){
+		motor[left] = -64 * direction;
+		motor[right] = 64 * direction;
+		motor[front] = -64 * direction;
+		motor[back] = 64 * direction;
+
+		wait1Msec(1100);
+		stopm();
+}
+
+void cforbac(long timeMS, int speed, int direction) {
+		motor[crighttop] = speed*(direction);
+		motor[crightbot] = speed*(direction);
+		motor[clefttop] = speed*(direction);
+		motor[cleftbot] = speed*(direction);
+
+		wait1Msec(timeMS);
+		stopm();
+	}
+
 void pre_auton()
 {
 
@@ -24,23 +71,29 @@ void pre_auton()
 
 task autonomous()
 {
+	forbac(12, 100, 1);
+	forbac(2, 127, -1);
+	forbac(2, 127, 1);
+	forbac(2, 127, -1);
+	forbac(44, 127, 1);
+	forbac(34, 127, -1);
 
-  AutonomousCodePlaceholderForTesting();
+	cforbac(1800, 127, 1);
+	forbac(30, 127, 1);
+	turn(1);
+	forbac(50, 127, 1);
+
 }
 
 task usercontrol()
 {
-	float SpeedDivisor = 2-vexRT[Btn6U];
-	float ForwDrive = vexRT[Ch3]/SpeedDivisor;
-	float SideDrive = vexRT[Ch4]/SpeedDivisor;
-	float turnSpeed = vexRT[Ch1] / speedDivisor;
 
-	while(True){
+	while(true){
 		/*Driving*/
 
-		float SpeedDivisor = 2-vexRT[Btn6U];
-		float ForwDrive = vexRT[Ch3]/SpeedDivisor;
-		float SideDrive = vexRT[Ch4]/SpeedDivisor;
+		float speedDivisor = 2-vexRT[Btn6U];
+		float ForwDrive = vexRT[Ch3] / speedDivisor;
+		float SideDrive = vexRT[Ch4] / speedDivisor;
 		float turnSpeed = vexRT[Ch1] / speedDivisor; // Right stick determines turning speed
 		motor[left] = ForwDrive - turnSpeed;
 		motor[right] = ForwDrive + turnSpeed;
