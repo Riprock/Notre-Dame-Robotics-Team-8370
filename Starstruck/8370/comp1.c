@@ -118,7 +118,7 @@ void right_turn(int time){ // moves right laterally (blue)
 void arm_down(int deg){	// moves arm down
 	while (SensorValue[ArmEncoder] > deg){
 		motor[armLeft] = -70;
-		motor[armLeft2] = -70; //L -70, R 50 cube1
+		motor[armLeft2] = -70;
 		motor[armRight] = 50;
 		motor[armRight2] = 50;
 	}
@@ -149,44 +149,34 @@ void drive_backward(int time){ // drives forward
 		motor[frontLeft]=-127;
 		wait1Msec(time);
 	}
-void arm_up(){
-		while(SensorValue[ArmTouch1] != 1){
-		// arm portion
-		motor[armLeft] = 127;
-		motor[armLeft2] = 127;
-		motor[armRight] = -127;
-		motor[armRight2] = -127;
-	}
-	}
 task autonomous()
 {
-					/*Old Cube autonomous*/
-					//SensorValue[ArmEncoder] = 0;
-					//back_shoot();
-					//stop_all(400); //stop
-					//drive_forward(270); //foreward a little
-					//stop_all(100);
-					//left_turn(350); //laeral
-					//stop_all(200); //stop
-					//drive_forward(990); // 500 ms == 3 ft
-					//stop_all(200);
-					//right_turn(360);
-					//stop_all(200);
-					//drive_backward(200);
-					//stop_all(500); //
-					//arm_down(20);
-					//stop_all(500);
-					//drive_forward(1500);
-					//stop_all(500);
-					//drive_backward(500);
-					//stop_all(500);
-					//arm_down(3);
-					//stop_all(500);
-					//drive_forward(1800);
-					//stop_all(500);
-					//cube_shoot();
-
+					SensorValue[ArmEncoder] = 0;
+					back_shoot();
+					stop_all(400); //stop
+					drive_forward(270); //foreward a little
+					stop_all(100);
+					left_turn(350); //laeral
+					stop_all(200); //stop
+					drive_forward(990); // 500 ms == 3 ft
+					stop_all(200);
+					right_turn(360);
+					stop_all(200);
+					drive_backward(200);
+					stop_all(500); //
+					arm_down(20);
+					stop_all(500);
+					drive_forward(1500);
+					stop_all(500);
+					drive_backward(500);
+					stop_all(500);
+					arm_down(3);
+					stop_all(500);
+					drive_forward(1800);
+					stop_all(500);
+					cube_shoot();
 					// positioning, side of arm aligned with first tab crossing, midsection of wheel aligned with second crossing of tabs
+  AutonomousCodePlaceholderForTesting();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -248,6 +238,27 @@ task usercontrol()
 	  	motor[backLeft] = LeftDrive;
 	  	motor[frontRight] = RightDrive;
 	  	motor[backRight] = RightDrive;
+
+/* combo moves*/
+// charge position
+  		if(vexRT[Btn7U] == 1 && backLimit == 0)
+    	{
+				motor[armLeft] = 127;
+				motor[armLeft2] = 127;
+				motor[armRight] = -127;
+				motor[armRight2] = -127;
+				wait1Msec(900);
+			}
+// defend position
+			if(vexRT[Btn7D] == 1)
+			{
+				if (SensorValue[ArmEncoder] < 90) {
+					startTask(defendPositionr);
+				} else {
+				startTask(defendPositionl);
+			}
+			}
+
 // arm code
 		if(vexRT[Btn6U] == 1 && backLimit == 0 )	// if button 6U is pressed, arm goes up
 			{
@@ -270,41 +281,37 @@ task usercontrol()
 				motor[armRight] = 0;
 				motor[armRight2] = 0;
 			}
+//test auto
+			if(vexRT[Btn8U] == 1){
+					SensorValue[ArmEncoder] = 0;
+					back_shoot();
+					stop_all(400); //stop
+					drive_forward(270); //foreward a little
+					stop_all(100);
+					left_turn(350); //laeral
+					stop_all(200); //stop
+					drive_forward(990); // 500 ms == 3 ft
+					stop_all(200);
+					right_turn(360);
+					stop_all(200);
+					drive_backward(200);
+					stop_all(500); //
+					arm_down(20);
+					stop_all(500);
+					drive_forward(1500);
+					stop_all(500);
+					drive_backward(700);
+					stop_all(500);
+					arm_down(3);
+					stop_all(500);
+					drive_forward(1500);
+					stop_all(500);
+					cube_shoot();
+					// positioning, side of arm aligned with first tab crossing, midsection of wheel aligned with second crossing of tabs
 
+			}
 			if(vexRT[Btn8D] == 1){
 				stop_all(1000000000);
-			}
-			if(vexRT[Btn8U] == 1){
-				SensorValue[ArmEncoder] = 0;
-
-				back_shoot();
-					stop_all(200);
-					drive_forward(270); //foreward a little
-					stop_all(50);
-					left_turn(350); //laeral
-					stop_all(50);
-					drive_forward(990); // 500 ms == 3 ft
-					stop_all(50);
-					right_turn(360);
-					stop_all(50);//prev 200
-					drive_backward(200); //comp:200
-					stop_all(50); //prev 500
-					arm_down(20);
-					stop_all(50); //prev 500
-					drive_forward(200); // comp:1500
-					stop_all(50);//prev 500
-					drive_backward(200); // comp:500
-					stop_all(50);//prev 500
-					arm_down(3);
-					stop_all(50);//prev 500
-					drive_forward(200); // comp:1800
-					stop_all(50);//prev 500
-					cube_shoot();
-
-
-					arm_down(3);
-					drive_forward(200); //comp: 1500
-					back_shoot();
 			}
 
 	}
