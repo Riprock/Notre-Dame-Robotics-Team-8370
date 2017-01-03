@@ -1,9 +1,6 @@
 #pragma config(Sensor, dgtl9,  ArmEncoder,     sensorQuadEncoder)
 #pragma config(Sensor, dgtl11, ArmTouch2,      sensorTouch)
 #pragma config(Sensor, dgtl12, ArmTouch1,      sensorTouch)
-#pragma config(Sensor, dgtl1,  newcube,      sensorDigitalIn)
-#pragma config(Sensor, dgtl2,  oldcube,     sensorDigitalIn)
-#pragma config(Sensor, dgtl3,  skills,        sensorDigitalIn)
 #pragma config(Motor,  port1,           backRight,     tmotorVex393_HBridge, openLoop, driveRight)
 #pragma config(Motor,  port2,           frontRight,    tmotorVex393_MC29, openLoop, driveRight)
 #pragma config(Motor,  port3,           frontLeft,     tmotorVex393_MC29, openLoop, driveLeft)
@@ -120,10 +117,10 @@ void right_turn(int time){ // moves right laterally (blue)
 	}
 void arm_down(int deg){	// moves arm down
 	while (SensorValue[ArmEncoder] > deg){
-		motor[armLeft] = -127;
-		motor[armLeft2] = -127; //L -70, R 50 cube1
-		motor[armRight] = 127;
-		motor[armRight2] = 127;
+		motor[armLeft] = -70;
+		motor[armLeft2] = -70; //L -70, R 50 cube1
+		motor[armRight] = 50;
+		motor[armRight2] = 50;
 	}
 	}
 void pause(int time){	// delay at beginning
@@ -152,149 +149,42 @@ void drive_backward(int time){ // drives forward
 		motor[frontLeft]=-127;
 		wait1Msec(time);
 	}
-void arm_up(int deg){	// moves arm down
-	while (SensorValue[ArmEncoder] < deg){
+void arm_up(){
+		while(SensorValue[ArmTouch1] != 1){
+		// arm portion
 		motor[armLeft] = 127;
-		motor[armLeft2] = 127; //L -70, R 50 cube1
+		motor[armLeft2] = 127;
 		motor[armRight] = -127;
 		motor[armRight2] = -127;
 	}
 	}
-void old_cube(){
-					SensorValue[ArmEncoder] = 0;
-					back_shoot();
-					stop_all(400); //stop
-					drive_forward(270); //foreward a little
-					stop_all(100);
-					left_turn(350); //laeral
-					stop_all(200); //stop
-					drive_forward(990); // 500 ms == 3 ft
-					stop_all(200);
-					right_turn(360);
-					stop_all(200);
-					drive_backward(200);
-					stop_all(500); //
-					arm_down(20);
-					stop_all(500);
-					drive_forward(1500);
-					stop_all(500);
-					drive_backward(500);
-					stop_all(500);
-					arm_down(3);
-					stop_all(500);
-					drive_forward(1800);
-					stop_all(500);
-					cube_shoot();
-	}
-void pro_skills(){
-	SensorValue[ArmEncoder] = 0;
-	int startReturn = 800;
-
-	back_shoot();
-	stop_all(200);
-	drive_forward(startReturn);
-	stop_all(400);
-	arm_down(3);
-	stop_all(2000);
-
-	cube_shoot();
-	stop_all(400);
-	drive_forward(startReturn);
-	stop_all(400);
-	arm_down(3);
-	stop_all(2000);
-
-	cube_shoot();
-	stop_all(400);
-	drive_forward(startReturn);
-	stop_all(400);
-	arm_down(3);
-	stop_all(1400);
-
-	arm_up(20);
-	back_shoot();
-	stop_all(300);
-	drive_forward(startReturn);
-	stop_all(400);
-	arm_down(3);
-	stop_all(1400);
-
-	arm_up(20);
-	back_shoot();
-	stop_all(300);
-	drive_forward(startReturn);
-	stop_all(400);
-	arm_down(3);
-	stop_all(1400);
-
-	arm_up(20);
-	back_shoot();
-	stop_all(300);
-	drive_forward(startReturn);
-	stop_all(400);
-	arm_down(3);
-	stop_all(1400);
-
-
-
-	}
-void alliance(){
-					SensorValue[ArmEncoder] = 0;
-					back_shoot();
-					//stop_all(200);
-					//drive_forward(800); //foreward a little
-					//stop_all(50);
-					//right_turn(100);
-					//arm_down(3);
-					//stop_all(50);//prev 200
-					//drive_forward(500); //comp:200
-					//stop_all(50); //prev 500
-					//right_turn(200);
-					//drive_forward(600);
-	}
-void new_cube(){
-					SensorValue[ArmEncoder] = 0;
-					back_shoot();
-					stop_all(200);
-					drive_forward(270); //foreward a little
-					stop_all(50);
-					left_turn(420); //laeral
-					stop_all(50);
-					drive_forward(1100); // 500 ms == 3 ft
-					stop_all(50);
-					right_turn(360);
-					stop_all(50);//prev 200
-					drive_backward(200); //comp:200
-					stop_all(50); //prev 500
-					arm_down(10);
-					stop_all(50); //prev 500
-					drive_forward(1500); // comp:1500
-					stop_all(50);//prev 500
-					drive_backward(500); // comp:500
-					stop_all(50);//prev 500
-					arm_down(3);
-					stop_all(50);//prev 500
-					drive_forward(1800); // comp:1800
-					stop_all(50);//prev 500
-					cube_shoot();
-
-					drive_forward(100);
-					stop_all(50);
-					arm_down(3);
-					stop_all(50);
-					drive_forward(1500); //comp: 1500
-					stop_all(50);
-					arm_up(50);
-					stop_all(50);
-					back_shoot();
-	}
-
 task autonomous()
 {
-
-			new_cube();
-
-
+					/*Old Cube autonomous*/
+					//SensorValue[ArmEncoder] = 0;
+					//back_shoot();
+					//stop_all(400); //stop
+					//drive_forward(270); //foreward a little
+					//stop_all(100);
+					//left_turn(350); //laeral
+					//stop_all(200); //stop
+					//drive_forward(990); // 500 ms == 3 ft
+					//stop_all(200);
+					//right_turn(360);
+					//stop_all(200);
+					//drive_backward(200);
+					//stop_all(500); //
+					//arm_down(20);
+					//stop_all(500);
+					//drive_forward(1500);
+					//stop_all(500);
+					//drive_backward(500);
+					//stop_all(500);
+					//arm_down(3);
+					//stop_all(500);
+					//drive_forward(1800);
+					//stop_all(500);
+					//cube_shoot();
 
 					// positioning, side of arm aligned with first tab crossing, midsection of wheel aligned with second crossing of tabs
 }
@@ -385,38 +275,36 @@ task usercontrol()
 				stop_all(1000000000);
 			}
 			if(vexRT[Btn8U] == 1){
-			pro_skills();
-		//SensorValue[ArmEncoder] = 0;
+				SensorValue[ArmEncoder] = 0;
 
-				//back_shoot();
-				//	stop_all(200);
-				//	drive_forward(270); //foreward a little
-				//	stop_all(50);
-				//	left_turn(350); //laeral
-				//	stop_all(50);
-				//	drive_forward(990); // 500 ms == 3 ft
-				//	stop_all(50);
-				//	right_turn(360);
-				//	stop_all(50);//prev 200
-				//	drive_backward(200); //comp:200
-				//	stop_all(50); //prev 500
-				//	arm_down(20);
-				//	stop_all(50); //prev 500
-				//	drive_forward(1500); // comp:1500
-				//	stop_all(50);//prev 500
-				//	drive_backward(500); // comp:500
-				//	stop_all(50);//prev 500
-				//	arm_down(3);
-				//	stop_all(50);//prev 500
-				//	drive_forward(1500); // comp:1800
-				//	stop_all(50);//prev 500
-				//	cube_shoot();
+				back_shoot();
+					stop_all(200);
+					drive_forward(270); //foreward a little
+					stop_all(50);
+					left_turn(350); //laeral
+					stop_all(50);
+					drive_forward(990); // 500 ms == 3 ft
+					stop_all(50);
+					right_turn(360);
+					stop_all(50);//prev 200
+					drive_backward(200); //comp:200
+					stop_all(50); //prev 500
+					arm_down(20);
+					stop_all(50); //prev 500
+					drive_forward(200); // comp:1500
+					stop_all(50);//prev 500
+					drive_backward(200); // comp:500
+					stop_all(50);//prev 500
+					arm_down(3);
+					stop_all(50);//prev 500
+					drive_forward(200); // comp:1800
+					stop_all(50);//prev 500
+					cube_shoot();
 
-				//	drive_forward(300);
-				//	arm_down(3);
-				//	drive_forward(1500); //comp: 1500
-				//	arm_up(50);
-				//	back_shoot();
+
+					arm_down(3);
+					drive_forward(200); //comp: 1500
+					back_shoot();
 			}
 
 	}
