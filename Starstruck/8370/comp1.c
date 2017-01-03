@@ -65,6 +65,18 @@ void stop_all(int time){	// stops all
 	motor[middleLeft] = 0;
 	wait1Msec(time);
 	}
+	void stop_all(int time){	// stops all
+	motor[armLeft] = 0;
+	motor[armLeft2] = 0;
+	motor[armRight] = 0;
+	motor[armRight2] = 0;
+	motor[backRight]= 0;
+	motor[backLeft]= 0;
+	motor[frontRight]= 0;
+	motor[frontLeft]= 0;
+	motor[middleLeft] = 0;
+	wait1Msec(time);
+	}
 void cube_shoot(){
 	while(SensorValue[ArmTouch1] != 1){
 		// arm portion
