@@ -506,6 +506,7 @@ task usercontrol()
 	nMotorEncoder[rightClaw] = 0;
 	nMotorEncoder[leftClaw] = 0;
 	SensorValue[armEncoder] = 0;
+	bool clawFlag = true;
   while (true)
   {
 
@@ -528,13 +529,14 @@ task usercontrol()
 					motor[rightClaw] = 127;
 					motor[leftClaw] = 127;
 		}
-		else if (SensorValue[armTouch] == 1){
+		else if ((SensorValue[armEncoder] > 50) && (clawFlag == true)) {
 			startTask (clawupopen);
+			clawFlag = false;
 			}
 			else if ((SensorValue[armEncoder] <50)){ // stays at 0 if lift is not going up
 				motor[leftClaw] = 0;
 				motor[rightClaw] = 0;
-
+				clawFlag = true;
 				}
 
 
