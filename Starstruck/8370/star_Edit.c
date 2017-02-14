@@ -86,11 +86,11 @@ void cube_shoot(){
             if (SensorValue[armEncoder] > 70){
                 motor[rightClaw] = -100;
 				motor[leftClaw] = -100;
-				wait1Msec(1000)
+				wait1Msec(1000);
 				motor[rightClaw] = 0;
 				motor[leftClaw] =  0;
                 clawFlag = false;
-            }       
+            }
         }
 		// drive portion
 		motor[backRight]=-127;
@@ -381,7 +381,7 @@ void open_claw(){}
 void close_claw(){
     motor[rightClaw] = 100;
 	motor[leftClaw] = 100;
-	wait1Msec(1000)
+	wait1Msec(1000);
 	motor[rightClaw] = 0;
 	motor[leftClaw] =  0;
 
@@ -487,9 +487,9 @@ task autonomous()
 
 // Lower to defend position
 task clawupopen(){
-						motor[rightClaw] = -100;
-						motor[leftClaw] = -100;
-						wait1Msec(1000);
+						motor[rightClaw] = -127;
+						motor[leftClaw] = -127;
+						wait1Msec(500);
 						motor[rightClaw] = 0;
 						motor[leftClaw] =  0;
 
@@ -524,15 +524,17 @@ task usercontrol()
 					motor[rightClaw] = 127;
 					motor[leftClaw] = 127;
 		}
-		else if ((SensorValue[armEncoder] > 70) && (clawFlag == true)) {
-			startTask (clawupopen);
-			clawFlag = false;
-			}
-			else if ((SensorValue[armEncoder] <70)){ // stays at 0 if lift is not going up
-				motor[leftClaw] = 0;
-				motor[rightClaw] = 0;
-				clawFlag = true;
+		else{
+				if ((SensorValue[armEncoder] > 70) && (clawFlag == true)) {
+					startTask (clawupopen);
+					clawFlag = false;
 				}
+				else{
+					motor[rightClaw] = 0;
+					motor[leftClaw] = 0;
+			}
+		}
+
 
 
 // arm code
@@ -560,6 +562,9 @@ task usercontrol()
 
 
 // 			}
+			if((SensorValue[armEncoder] <70)){ // stays at 0 if lift is not going up
+				clawFlag = true;
+				}
 	  	if(vexRT[Btn6U] == 1 && backLimit == 0 )	// if button 6U is pressed, arm goes up
 			{
 
@@ -567,6 +572,7 @@ task usercontrol()
 				motor[armLeft2] = 127;
 				motor[armRight] = -127;
 				motor[armRight2] = -127;
+
 			}
 	 	 else if(vexRT[Btn6D] == 1) // if button 6D is pressed, arm goes down
 			{
